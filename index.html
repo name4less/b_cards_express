@@ -1,0 +1,124 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Business Cards</title>
+    <style>
+
+        html {
+            margin: 0 auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .col--hidden {
+            display: none;
+            margin: 5px 5px 5px 5px;
+        }
+        .row {
+            margin-left: auto;
+            margin-right: auto;
+            align-items: center;
+        }
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 250px;
+            height: 300px;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+        .card-group {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .col {
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #img {
+            border-radius: 5px 5px 0 0;
+        }
+
+        .loadMore {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            width: 500px;
+            border: 1px solid gray;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Business Cards</span>
+        </div>
+    </nav>
+    
+    <div class="card-group justify-content-center">
+        <div id="cards" class="row row-cols-2 row-cols-md-3"></div>
+    </div>
+    <a href="#" id="loadMore" class="loadMore"> Load More </a>
+
+    <footer>
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © Nimchenko Anastasiya 2021
+        </div>
+    </footer>
+    
+    <script>
+
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $( document ).ready(function() {
+            $(function(){
+                $("#loadMore").on('click', function(e){
+                    e.preventDefault();
+                    $(".col--hidden").slice(0,3).slideDown().removeClass('col--hidden');
+
+                    $(this).toggle();
+                })})
+        });
+        //$(document).ready(JSONToCSVConvertor(cardsData));
+    </script>
+    <!-- <script>
+        function JSONToCSVConvertor(JSONData) {    
+	    var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;   
+	    var CSV = '';     
+	
+        for (var i = 0; i < arrData.length; i++) {
+            var row = "";
+            for (var index in arrData[i]) {
+                    var arrValue = arrData[i][index] == null ? "" : '="' + arrData[i][index] + '"';
+                    row += arrValue + ',';
+            }
+            row.slice(0, row.length - 1);
+            CSV += row + '\r\n';
+        }
+        if (CSV == '') {        
+            growl.error("Invalid data");
+            return;
+        }   
+        var uri = 'data:application/csv;charset=utf-8,' + escape(CSV);
+        var link = document.createElement("a");
+        link.href = uri;
+        link.download = fileName + ".csv";
+        document.body.append(link);
+        link.click();
+        document.body.remove(link);
+    }
+    </script> -->
+</body>
+</html>
