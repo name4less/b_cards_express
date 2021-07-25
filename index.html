@@ -6,7 +6,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Business Cards</title>
     <style>
-
         html {
             margin: 0 auto;
             margin-left: auto;
@@ -67,6 +66,7 @@
     
     <div class="card-group justify-content-center">
         <div id="cards" class="row row-cols-2 row-cols-md-3"></div>
+        
     </div>
     <a href="#" id="loadMore" class="loadMore"> Load More </a>
 
@@ -75,13 +75,11 @@
             © Nimchenko Anastasiya 2021
         </div>
     </footer>
-    
-    <script>
-
-    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        $(".col--hidden").slice(0,3).removeClass('col--hidden');
+
         $( document ).ready(function() {
             $(function(){
                 $("#loadMore").on('click', function(e){
@@ -91,34 +89,6 @@
                     $(this).toggle();
                 })})
         });
-        //$(document).ready(JSONToCSVConvertor(cardsData));
     </script>
-    <!-- <script>
-        function JSONToCSVConvertor(JSONData) {    
-	    var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;   
-	    var CSV = '';     
-	
-        for (var i = 0; i < arrData.length; i++) {
-            var row = "";
-            for (var index in arrData[i]) {
-                    var arrValue = arrData[i][index] == null ? "" : '="' + arrData[i][index] + '"';
-                    row += arrValue + ',';
-            }
-            row.slice(0, row.length - 1);
-            CSV += row + '\r\n';
-        }
-        if (CSV == '') {        
-            growl.error("Invalid data");
-            return;
-        }   
-        var uri = 'data:application/csv;charset=utf-8,' + escape(CSV);
-        var link = document.createElement("a");
-        link.href = uri;
-        link.download = fileName + ".csv";
-        document.body.append(link);
-        link.click();
-        document.body.remove(link);
-    }
-    </script> -->
 </body>
 </html>

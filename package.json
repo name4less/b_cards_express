@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/name4less/b_cards.git"
+    "url": "git"
   },
   "keywords": [
     "node.js",
@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "csv-writer": "^1.6.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "jsdom": "^16.6.0",
     "node-fetch": "^2.6.1",

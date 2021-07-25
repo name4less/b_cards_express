@@ -6,17 +6,8 @@ const fetch = require("node-fetch");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
-//БД
-const url = 'https://reqres.in/api/users';
-
-//инициализация глобального окружения
-global.document = new JSDOM(this.html).window.document;
-global.window = new JSDOM(this.html).window;
-
-var cardsData;
-
-
 async function getCards() {
+    return new Promise( async (resolve, reject) => {
     await fetch('https://reqres.in/api/users')
     .then(response => response.json())
     .then(json => {
@@ -33,13 +24,20 @@ async function getCards() {
                 </div>
             `;
         });
-        //global.document.getElementById('cards').innerHTML = cardsData.join('');
+        JSDOM.fromFile('index.html').then( (dom) => {
+            let cards = dom.window.document.getElementById('cards');
+            cards.innerHTML= cardsData.join('');
+            
+            resolve(dom.serialize());
+        });
     });
+    });
+    
 }
 
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve('index.html'));
-    getCards();
+app.get('/', async (req, res) => {
+    const html = await getCards();
+    res.send(html);
 });
 
 server.listen(3000, (err) =>{
