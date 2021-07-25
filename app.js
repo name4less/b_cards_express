@@ -8,31 +8,34 @@ const { JSDOM } = jsdom;
 
 async function getCards() {
     return new Promise( async (resolve, reject) => {
-    await fetch('https://reqres.in/api/users')
-    .then(response => response.json())
-    .then(json => {
-        cardsData = json.data.map(el => {
-            return `
-                <div class="col col--hidden" >
-                    <div class="card">
-                        <img src="${el.avatar}" class="card-img-top"  width="200" height="200" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">${el.first_name} ${el.last_name}</h5>
-                            <p class="card-text">${el.email}</p>
+        try {
+            await fetch('https://reqres.in/api/users')
+            .then(response => response.json())
+            .then(json => {
+                cardsData = json.data.map(el => {
+                    return `
+                        <div class="col col--hidden" >
+                            <div class="card">
+                                <img src="${el.avatar}" class="card-img-top"  width="200" height="200" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">${el.first_name} ${el.last_name}</h5>
+                                    <p class="card-text">${el.email}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            `;
-        });
-        JSDOM.fromFile('index.html').then( (dom) => {
-            let cards = dom.window.document.getElementById('cards');
-            cards.innerHTML= cardsData.join('');
-            
-            resolve(dom.serialize());
-        });
+                    `;
+                });
+                JSDOM.fromFile('index.html').then( (dom) => {
+                    let cards = dom.window.document.getElementById('cards');
+                    cards.innerHTML= cardsData.join('');
+                    resolve(dom.serialize());
+                });
+            });
+                console.log('Cards are received and everything works');
+          } catch (error) {
+            console.error('Error:', error);
+          }
     });
-    });
-    
 }
 
 app.get('/', async (req, res) => {
@@ -44,5 +47,5 @@ server.listen(3000, (err) =>{
     if(err){
         throw Error(err);
     }
-    console.log('Server is runnig');
+    console.log('Server is running');
 });
